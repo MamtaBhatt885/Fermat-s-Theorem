@@ -50,3 +50,6 @@ print("\n--- Final Smallest Near Miss ---")
 print(f"x = {best_x}, y = {best_y}, z = {best_z}")
 print(f"Miss = {best_miss}")
 print(f"Relative miss = {smallest_relative_miss:.8f}")
+
+
+input("\nPress Enter to exit...")
