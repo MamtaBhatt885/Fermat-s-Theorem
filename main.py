@@ -1,15 +1,19 @@
-# OPENING COMMENT:
-# Program Name: Looking for Fermat's Last Theorem Near Misses
-# •	the name of the file that holds your program
-# •	a list of any external files necessary to run your program
-# •	a list of external files your program creates. If you list any external files, briefly explain what each of them contains
+# -------------------------------------------------------------
+# Program Title: Fermat's Last Theorem Near Miss Finder
+# File Name: fermat_near_miss.py
 # Programmers: Mamta Bhatt and Megan Powers
-# ??????? and meganlpowers@lewisu.edu
-# CPSC 60500 Section 4
-# Submission Date: November 16, 2025
-# This program helps an interactive user search for near misses of Fermat's Last Theorem. While x^n + y^n = z^n cannot be true, we will find values that come close to it being true. x, y, z, and n are all positive integers, and n is greater than two and less than 12. The user will input n and also k which will limit the number of attempts.
-# •	any resources you used to complete the program (Always give credit where credit is due; for example, if you used a website to check on an algorithm, list that here.)
-
+# Emails: mbhatt@lewisu.edu, meganlpowers@lewis.edu
+# Course: CPSC 60000 Section 4- Software Engineering
+# Date Submitted: November 16, 2025
+# Description: Searches for near-miss integer combinations for Fermat’s Last Theorem.
+# [....should this include a shortened version of the READ ME program description?....]
+# Language: Python, created on PyCharm version 2021.3.2
+# External Files: None
+# Files Created: none
+# Libraries Used: None
+# How to Run: [...........] See README for more instructions.
+# Resources Used: [...........]
+# -------------------------------------------------------------
 
 
 # Prompt user for n (integer), prompt again if invalid
