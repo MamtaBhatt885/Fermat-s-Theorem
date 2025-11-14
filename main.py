@@ -5,101 +5,71 @@
 # Emails: mbhatt@lewisu.edu, meganlpowers@lewis.edu
 # Course: CPSC 60000 Section 4- Software Engineering
 # Date Submitted: November 16, 2025
-# Description: Searches for near-miss integer combinations for Fermat’s Last Theorem.
-# [....should this include a shortened version of the READ ME program description?....]
-# Language: Python, created on PyCharm version 2021.3.2
+# Description: Searches for values that create a near-miss for Fermat’s Last Theorem. Fermat's Last Theorem states that there are no natural numbers such that x^n + y^n = x^n, but this equation can get close to being true. This program discovers values for x, y, and z given a value of n which make the equation close to being true. These sets of values are called Near Misses. To run this program, a user first enters a chosen value of n, a natural number between 3 and 11. Then the user enters a chosen value of k, a natural number between 11 and 50 which tells the program which values of x, y, and z to test the equation with. The program finds the Near Miss value of each equation using values of x, y, and y each between 11 and the user inputted k. A "miss" value shows the user the actual natural number difference between the two sides of the equation. A "relative miss" value shows the user the relative closeness of the equation being true by dividing the "miss" by x^n = y^n. The "relative miss" is also shown as a percentage. As the program runs the equations, the smallest "relative miss" is considered the best Near Miss and is shown to the user. When all equations have been run, the user is given values for the best Near Miss.
+# Language: Python 3.11, created on PyCharm version 2021.3.2
 # External Files: None
 # Files Created: none
 # Libraries Used: None
 # How to Run: [...........] See README for more instructions.
-# Resources Used: [...........]
+# Resources Used: Google, YouTube and ChatGPT to learn GitHub
 # -------------------------------------------------------------
 
 
-# Prompt user for n (integer), prompt again if invalid
-n = int(input("Please enter a whole number value for n: "))
-# 	Check that n is greater than 2
+# ASK THE USER FOR INPUT
+
+# The exponent, n:
+n = int(input("Enter a natural number value for n: "))
+# Check that n is greater than 2
 while n < 3:
-    n = int(input("Please enter a whole number value of n that is no less than 3: "))
-# 	Check that n is less than 12
-while n > 12:
-    n = int(input("Please enter a whole number value of n that is no greater than 12: "))
-# TEST PRINT (delete later):
-print("n = ", n)
+    n = int(input("Enter a natural number value of n that is no less than 3: "))
+# Check that n is less than 12
+while n > 11:
+    n = int(input("Enter a natural number value of n that is no greater than 11: "))
+
+# The upper limit, k:
+k = int(input("Enter a natural number value for k: "))
+#  Check that k is greater than 10
+while k < 11:
+    k = int(input("Enter a natural number value of k that is no less than 11: "))
+#  Check that k is less than 50 (a large enough number that still shows a relative miss)
+while k > 50:
+    k = int(input("Enter a natural number value of k that is no greater than 50: "))
 
 
+# RUN LOOPS TO SOLVE FOR ALL VALUES OF x AND y
+# AND KEEP TRACK OF THE CLOSEST NEAR-MISS
 
-# Prompt user for k (integer), prompt again if invalid
-k = int(input("Please enter a whole number value for k: "))
-# 	Check that k is greater than 10
-while k < 10:
-    k = int(input("Please enter a whole number value of k that is no less than 11: "))
-# 	Check that k is less than ???? (a large number to avoid crashes)
-while k > 20:
-    k = int(input("Please enter a whole number value of n that is no greater than 20: "))
-# TEST PRINT (delete later):
-print("k = ", k)
+# Initialize variables to hold values of closest near-misses
+smallest_relative_miss = 1.0  # large number to start
+best_x, best_y, best_z = 0, 0, 0  # x, y and z values for a near-miss
+best_miss = 0  #
 
+# Start looping through all x, y combinations
+for x in range(10, k + 1):  # loops through each value of x, 10 through k
+    for y in range(10, k + 1):  # loops through each value of y, 10 through k
+        sum_val = x ** n + y ** n  # solves the left side of the equation, saved as sum_val
+        z = int(sum_val ** (1 / n))  # solves for z
+        miss_1 = abs(sum_val - z ** n)  # finds how large of a miss the equation is using z
+        miss_2 = abs((z + 1) ** n - sum_val)  # finds how large of a miss the equation is using z+1
+        miss = min(miss_1, miss_2)  # determines if the closer miss is with z or z+1
+        relative_miss = miss / sum_val  # calculates the relative miss
 
-
-# Create the next set of values to test
-# 	Start with x=y=z=10
-x = int(10)
-y = int(10)
-z = int(10)
-# TEST PRINT (delete later):
-print("x = ", x, "y = ", y, "z = ", z)
-# Increase x by 1 until x=k, repeat loop:
-## while x <= k:
-##    **run the calculations**
-##    x += 1
-# Then increase y by 1 until y=k, repeat loop:
-## while y <= k:
-##    **run the calculations**
-##    y += 1
-# Then increase z by 1 until z^n > (x^n + y^n)
-## while z**n > (x**n + y**n):
-##    **run the calculations**
-##    z += 1
+        # Check if this is the closest miss so far
+        if relative_miss < smallest_relative_miss:
+            # If so, save and print the values
+            smallest_relative_miss = relative_miss
+            best_x, best_y, best_z = x, y, z
+            best_miss = miss
+            print(f"New smallest near miss: x={x}, y={y}, z={z}, miss={miss}, relative miss={relative_miss:.8f}")
 
 
+# PRINT THE BEST NEAR-MISS
 
-# Find the amount of the actual miss (positive integer "a") for z and z+1, and return the smaller value
-# Compare [(x^n + y^n) - z^n] and [(z+1)^n - (x^n + y^n)], then assign the smaller value to "a" (ignore negativity)
-if abs(((x**n + y**n) - z**n)) < ((z+1)**n - (x**n + y**n)):
-    a = int(abs((x ** n + y ** n) - z ** n))
-if abs(((x**n + y**n) - z**n) > ((z+1)**n - (x**n + y**n))):
-    a = int(abs((z+1)**n - (x**n + y**n)))
-# TEST PRINT (delete later):
-print("x^n + y^n = ", x**n+y**n, ", z^n = ", z**n, ", (z+1)^n = ", (z+1)**n)
-# TEST PRINT (delete later):
-print("The actual miss, a = ", a)
+print("\n--- Final Closest Near Miss ---")
+print(f"x = {best_x}, y = {best_y}, z = {best_z}")
+print(f"Miss = {best_miss}")
+print(f"Relative miss = {smallest_relative_miss:.8f}, ({100*smallest_relative_miss:.8f}%)")
 
+input("\nPress Enter to exit...")
+exit()
 
-
-# Find the amount of the relative misses (float "r"), which is the actual miss divided by x^n + y^n
-r = float(a / ((x**n) + (y**n)))
-# TEST PRINT (delete later):
-print("The relative miss, r = ", r)
-
-
-
-# Compare the newest relative miss with the previously smallest relative miss
-# 	If the newest relative miss is greater, then continue
-# 	If the newest relative miss is smaller, then replace the old relative miss and print
-
-
-
-
-# Print the latest best result
-# 	Print and label current x, y, z values (integers)
-print("When x=", x, ", y= ", y, ", and z=", z)
-# 	Print and label the actual miss (integer)
-print("then the actual miss is ", a)
-# 	Print and label the relative miss (as a percentage)
-print("and the relative miss is ", r*100, "%")
-
-
-
-# Print and label best result
-# Create a pause at the end or ask the user to type after reading to continue
