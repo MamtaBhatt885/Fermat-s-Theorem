@@ -4,7 +4,7 @@
 # Programmers: Mamta Bhatt and Megan Powers
 # Emails: mbhatt@lewisu.edu, meganlpowers@lewis.edu
 # Course: CPSC 60500 Section 4- Software Engineering
-# Date Submitted: November 16, 2025
+# Date Submitted: November 14, 2025
 # Description: Searches for values that create a near-miss for Fermat’s Last Theorem. Fermat's Last Theorem states that
 # there are no natural numbers such that x^n + y^n = x^n, but this equation can get close to being true. This program
 # discovers values for x, y, and z given a value of n which make the equation close to being true. These sets of values
@@ -18,8 +18,8 @@
 # equations have been run, the user is given values for the best Near Miss.
 # Language: Python 3.11, created on PyCharm version 2021.3.2
 # External Files: None
-# Files Created: none
-# Libraries Used: None
+# Files Created: fermat_near_miss.exe
+# Libraries Used: Pyinstaller
 # How to Run: python, pyinstaller. Run fermat_near_miss.exe
 # Resources Used: Google, YouTube and ChatGPT to learn GitHub
 # -------------------------------------------------------------
@@ -45,33 +45,41 @@ while k < 11:
 while k > 500:
     k = int(input("Enter a natural number value of k that is no greater than 500: "))
 
-# Initialize before the loops
+
+# RUN LOOPS TO SOLVE FOR ALL VALUES OF x AND y
+# AND KEEP TRACK OF THE CLOSEST NEAR-MISS
+
+# Initialize variables to hold values of closest near-misses
 smallest_relative_miss = 1.0  # large number to start
-best_x, best_y, best_z = 0, 0, 0
-best_miss = 0
+best_x, best_y, best_z = 0, 0, 0  # x, y and z values for a near-miss
+best_miss = 0  #
 
 # Start looping through all x, y combinations
-for x in range(10, k + 1):
-    for y in range(10, k + 1):
-        sum_val = x ** n + y ** n
-        z = int(sum_val ** (1 / n))
-        miss_1 = abs(sum_val - z ** n)
-        miss_2 = abs((z + 1) ** n - sum_val)
-        miss = min(miss_1, miss_2)
-        relative_miss = miss / sum_val
+for x in range(10, k + 1):  # loops through each value of x, 10 through k
+    for y in range(10, k + 1):  # loops through each value of y, 10 through k
+        sum_val = x ** n + y ** n  # solves the left side of the equation, saved as sum_val
+        z = int(sum_val ** (1 / n))  # solves for z
+        miss_1 = abs(sum_val - z ** n)  # finds how large of a miss the equation is using z
+        miss_2 = abs((z + 1) ** n - sum_val)  # finds how large of a miss the equation is using z+1
+        miss = min(miss_1, miss_2)  # determines if the closer miss is with z or z+1
+        relative_miss = miss / sum_val  # calculates the relative miss
 
-        # Check if this is the smallest miss so far
+        # Check if this is the closest miss so far
         if relative_miss < smallest_relative_miss:
+            # If so, save and print the values
             smallest_relative_miss = relative_miss
             best_x, best_y, best_z = x, y, z
             best_miss = miss
             print(f"New smallest near miss: x={x}, y={y}, z={z}, miss={miss}, relative miss={relative_miss:.8f}")
 
-# Print final result
-print("\n--- Final Smallest Near Miss ---")
+
+# PRINT THE BEST NEAR-MISS
+
+print("\n--- Final Closest Near Miss ---")
 print(f"x = {best_x}, y = {best_y}, z = {best_z}")
 print(f"Miss = {best_miss}")
-print(f"Relative miss = {smallest_relative_miss:.8f}")
-
+print(f"Relative miss = {smallest_relative_miss:.8f}, ({100*smallest_relative_miss:.8f}%)")
 
 input("\nPress Enter to exit...")
+exit()
+
