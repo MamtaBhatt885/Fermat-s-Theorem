@@ -3,14 +3,24 @@
 # File Name: fermat_near_miss.py
 # Programmers: Mamta Bhatt and Megan Powers
 # Emails: mbhatt@lewisu.edu, meganlpowers@lewis.edu
-# Course: CPSC 60000 Section 4- Software Engineering
+# Course: CPSC 60500 Section 4- Software Engineering
 # Date Submitted: November 16, 2025
-# Description: Searches for values that create a near-miss for Fermat’s Last Theorem. Fermat's Last Theorem states that there are no natural numbers such that x^n + y^n = x^n, but this equation can get close to being true. This program discovers values for x, y, and z given a value of n which make the equation close to being true. These sets of values are called Near Misses. To run this program, a user first enters a chosen value of n, a natural number between 3 and 11. Then the user enters a chosen value of k, a natural number between 11 and 50 which tells the program which values of x, y, and z to test the equation with. The program finds the Near Miss value of each equation using values of x, y, and y each between 11 and the user inputted k. A "miss" value shows the user the actual natural number difference between the two sides of the equation. A "relative miss" value shows the user the relative closeness of the equation being true by dividing the "miss" by x^n = y^n. The "relative miss" is also shown as a percentage. As the program runs the equations, the smallest "relative miss" is considered the best Near Miss and is shown to the user. When all equations have been run, the user is given values for the best Near Miss.
+# Description: Searches for values that create a near-miss for Fermat’s Last Theorem. Fermat's Last Theorem states that
+# there are no natural numbers such that x^n + y^n = x^n, but this equation can get close to being true. This program
+# discovers values for x, y, and z given a value of n which make the equation close to being true. These sets of values
+# are called Near Misses. To run this program, a user first enters a chosen value of n, a natural number between 3 and
+# 11. Then the user enters a chosen value of k, a natural number between 11 and 50 which tells the program which values
+# of x, y, and z to test the equation with. The program finds the Near Miss value of each equation using values of x, y,
+# and y each between 11 and the user inputted k. A "miss" value shows the user the actual natural number difference
+# between the two sides of the equation. A "relative miss" value shows the user the relative closeness of the equation
+# being true by dividing the "miss" by x^n = y^n. The "relative miss" is also shown as a percentage. As the program runs
+# the equations, the smallest "relative miss" is considered the best Near Miss and is shown to the user. When all
+# equations have been run, the user is given values for the best Near Miss.
 # Language: Python 3.11, created on PyCharm version 2021.3.2
 # External Files: None
 # Files Created: none
 # Libraries Used: None
-# How to Run: [...........] See README for more instructions.
+# How to Run: python, pyinstaller. Run fermat_near_miss.exe
 # Resources Used: Google, YouTube and ChatGPT to learn GitHub
 # -------------------------------------------------------------
 
@@ -31,9 +41,9 @@ k = int(input("Enter a natural number value for k: "))
 #  Check that k is greater than 10
 while k < 11:
     k = int(input("Enter a natural number value of k that is no less than 11: "))
-#  Check that k is less than 50 (a large enough number that still shows a relative miss)
-while k > 50:
-    k = int(input("Enter a natural number value of k that is no greater than 50: "))
+#  Check that k is less than 500
+while k > 500:
+    k = int(input("Enter a natural number value of k that is no greater than 500: "))
 
 
 # RUN LOOPS TO SOLVE FOR ALL VALUES OF x AND y
